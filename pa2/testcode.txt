@@ -1,0 +1,189 @@
+Test Case 1 CODE(BASE CASES):
+SortedListPtr sl1 = SLCreate(compareInts, NULL);
+SLDestroy(sl1);
+
+*******************************************************************************
+
+Test Case 2 CODE(BASE CASES):
+
+int IntegerArray[] = {5, 10, 7, 2, 10, 12};
+
+SortedListPtr sl = NULL; 
+
+int j = 0;
+SLInsert(sl, &IntegerArray[j]);
+
+SLDestroy(sl);
+
+************************************************************************************
+
+Test Case 3 CODE(BASE CASES):
+
+int IntegerArray[] = {5, 10, 7, 2, 10, 12};
+void * printer;
+
+SortedListPtr sl = SLCreate(compareInts, destroyBasicTypeNoAlloc);
+
+int i;
+for(i=0; i<(sizeof(IntegerArray)/sizeof(IntegerArray[0])); i++){
+	if(SLInsert(sl, &IntegerArray[i])==0)
+		printf("There was an error but the list was still created anyway\n");
+}
+
+SortedListIteratorPtr iter = SLCreateIterator(sl);
+
+printf("List: ");
+while((printer=SLNextItem(iter)) != NULL)
+	printf("%d ", *(int *)printer);
+printf("\n");
+
+SLDestroyIterator(iter);
+SLDestroy(sl);
+
+**************************************************
+
+Test Case 4 CODE(BASE CASES):
+
+int IntegerArray[] = {5, 10, 7, 2, 12};
+void * printer;
+
+SortedListPtr sl = SLCreate(compareInts, destroyBasicTypeNoAlloc);
+
+int i;
+for(i=0; i<(sizeof(IntegerArray)/sizeof(IntegerArray[0])); i++){
+	if(SLInsert(sl, &IntegerArray[i])==0)
+		printf("There was an error but the list was still created anyway\n");
+}
+
+SLRemove(sl, &IntegerArray[1]);
+SLRemove(sl, &IntegerArray[1]);
+
+SortedListIteratorPtr iter = SLCreateIterator(sl);
+
+printf("List: ");
+while((printer=SLNextItem(iter)) != NULL)
+	printf("%d ", *(int *)printer);
+printf("\n");
+
+SLDestroyIterator(iter);
+SLDestroy(sl);
+
+***********************************************************************
+
+Test Case 5 CODE:
+
+const char * stringArray[] = {"John", "Boxer", "Dog"};
+void * printer;
+
+SortedListPtr sl = SLCreate(compareStrings, destroyBasicTypeNoAlloc);
+
+int i;
+for(i=0; i<(sizeof(stringArray)/sizeof(stringArray[0])); i++){
+	if(SLInsert(sl, (void *)stringArray[i])==0)
+		printf("There was an error but the list was still created anyway\n");
+}
+
+SortedListIteratorPtr iter = SLCreateIterator(sl);
+SLInsert(sl, "Zack");
+
+printf("List: ");
+while((printer=SLNextItem(iter)) != NULL)
+	printf("%s ", (char *)printer);
+printf("%s ", (char *)SLNextItem(iter));
+printf("\n");
+
+SLDestroyIterator(iter);
+SLDestroy(sl);
+
+*********************************************************************
+
+Test Case 6 CODE:
+
+const char * stringArray[] = {"Zoid", "Brackets", "Apple"};
+void * printer;
+
+SortedListPtr sl = SLCreate(compareStrings, destroyBasicTypeNoAlloc);
+
+int i;
+for(i=0; i<(sizeof(stringArray)/sizeof(stringArray[0])); i++){
+	if(SLInsert(sl, (void *)stringArray[i])==0)
+		printf("There was an error but the list was still created anyway\n");
+}
+
+SortedListIteratorPtr iter = SLCreateIterator(sl);
+
+printf("List: ");
+while((printer=SLNextItem(iter)) != NULL)
+	printf("%s ", (char *)printer);
+
+SLInsert(sl, "  zoom");
+printf("%s ", (char *)SLNextItem(iter));
+printf("\n");
+
+SLDestroyIterator(iter);
+SLDestroy(sl);
+
+***********************************************
+
+Test Case 7 CODE:
+
+double doubleArray[] = {12.5, 6.3, 2.7};
+double d = doubleArray[1];
+
+SortedListPtr sld = SLCreate(compareDoubles, destroyBasicTypeNoAlloc);
+
+int k;
+for(k=0; k<(sizeof(doubleArray)/sizeof(doubleArray[0])); k++){
+	if(SLInsert(sld, &doubleArray[k])==0)
+		printf("There was an error but the list was still created anyway\n");
+}
+
+SortedListIteratorPtr iter = SLCreateIterator(sld);
+
+SLNextItem(iter);
+
+SLRemove(sld, &d);
+printf("%f ", *(double*)SLNextItem(iter));
+if(SLNextItem(iter) == NULL)
+	printf("NULL\n");
+
+SLDestroyIterator(iter);
+SLDestroy(sld);
+
+*******************************************************************************
+
+Test Case 8 CODE:
+
+const char * stringArr[] = {"zoom", "wii", "Soccer", "Zoid", "Brackets", " zoom"};
+void * print;
+void * print2;
+
+SortedListPtr sl = SLCreate(compareStrings, destroyBasicTypeNoAlloc);
+
+int p;
+for(p=0; p<(sizeof(stringArr)/sizeof(stringArr[0])); p++){
+	if(SLInsert(sl, (void *)stringArr[p])==0)
+		printf("There was an error but the list was still created anyway\n");
+}
+
+SortedListIteratorPtr iterator = SLCreateIterator(sl);
+SortedListIteratorPtr iterator2 = SLCreateIterator(sl);			
+
+printf("iterator 1: ");
+print = SLNextItem(iterator);
+printf("%s \n", (char *)iterator->currentNode->data);
+		
+printf("iterator 2: ");
+print2 = SLNextItem(iterator2);
+print2 = SLNextItem(iterator2);
+printf("%s \n", (char *)iterator2->currentNode->data);	
+		
+
+SLRemove(sl, iterator->currentNode->data);
+SLRemove(sl, iterator2->currentNode->data);
+
+printf("%s \n", (char *)SLNextItem(iterator));
+printf("%s \n", (char *)SLNextItem(iterator2));	
+
+SLDestroyIterator(iterator);
+SLDestroy(sl);

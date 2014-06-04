@@ -1,0 +1,152 @@
+Test Case 1 (BASE CASES)
+
+Test Summary:
+
+Tests what happens if you try to create a list with a missing function (destroyer or compare).
+
+Expected Result:
+
+"Missing one or both of the functions required to create to created a sorted list"
+
+*******************************************************************************
+
+Test Case 2 (BASE CASES)
+
+Test Summary:
+
+Tests what happens if you try to insert an item into a list a does not exist.
+
+Expected Result:
+
+"List was not allocated properly"
+
+*******************************************************************************
+
+Test Case 3 (BASE CASES)
+
+Test Summary:
+
+Tests what happens if you try to insert a duplicate item in the list
+
+Array:	[5, 10, 7, 2, 10, 12]
+
+Expected Result:
+
+A Sorted List [12, 10, 7, 5, 2]
+With the output: "Item inserted is a duplicate" when you try to insert 10 twice, 0 is returned as an error.
+
+*******************************************************************************
+
+Test Case 4 (BASE CASES)
+
+Test Summary:
+
+Tests what happens if you remove an item that is no longer in the list
+
+List:	[12, 10, 7, 5, 2]
+
+SLRemove(sl, 10);
+SLRemove(sl, 10);
+
+Expected Result:
+
+The first remove call will successfully remove 10
+The second remove call will return 0 (error) and print "Item was not found"
+
+*******************************************************************************
+
+Test Case 5
+
+Test Summary:
+
+Testing SLNextItem and SLInsert with direct string arguments. SLNextItem shouldn’t return an item that is added after an iterator is created.
+
+Test Datatype: Strings
+
+List: 	[“John”,”Dog”,”Boxer”]
+
+iterator1 is created and points to "John"
+
+“Zack” is added to the list
+
+Expected Result:
+
+SLNextItem on iterator1 returns "John"
+SLNextItem on iterator1 returns "Dog"
+SLNextItem on iterator1 returns "Boxer"
+SLNextItem on iterator1 returns NULL
+
+*******************************************************************************
+
+Test Case 6
+
+Test Summary: Testing SLNextItem after inserting an item while the iterator should return NULL. Testing SLInsert with direct string arguments.
+
+Test Datatype: Strings
+
+List: 	[”Zoid”, "Brackets", "Apple"]
+
+iterator1 is created
+
+SLNextItem returns “Zoid”
+SLNextItem returns “Brackets”
+SLNextItem returns “Apple”
+
+“  zoom” is inserted
+
+Expected Result:
+
+SLNextItem returns NULL
+
+************************************************************************************
+
+Test Case 7
+
+Test Summary: Testing SLNextItem by calling SLNextItem after removing an item it pointed to. Testing arguments to SLInsert and SLRemove with pointers to doubles.
+
+Test Datatype: double
+
+
+List:	[12.5, 6.3, 2.7]
+
+
+iterator1 is created
+
+SLNextItem returns “12.5”
+
+SLRemove is called, removing “6.3”
+
+
+Expected Result:
+
+SLNextItem returns “2.7”
+SLNextItem returns NULL
+
+************************************************************************************
+
+Test Case 8
+
+Test Summary: Testing SLNextItem with multiple iterators removing items in the same list. SLNextItem should not return an item removed by another iterator. Testing SLInsert and SLRemove arguments with direct strings.
+
+Test Datatype: Strings
+
+List:	["zoom", “wii”, ”Soccer”, ”Zoid”, "Brackets", "  zoom"]
+
+
+iterator1 is created
+iterator2 is created
+
+iterator1 points to “wii”
+iterator2 points to “Zoid”
+
+“wii” is removed
+“Zoid” is removed
+
+SLNextItem on iterator1
+SLNextItem on iterator2
+
+
+Expected Result:
+
+iterator1 returns “Soccer”
+iterator2 returns “Soccer”
